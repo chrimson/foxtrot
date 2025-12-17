@@ -1,9 +1,10 @@
 # Foxtrot
 Some Kubernetes basics
 
-Deployment  
+
+Deployment  i
 ```
-ubuntu@ip-172-31-79-128:~/foxtrot/chart$ helm install foxtrot foxtrot
+ubuntu@ip-172-31-79-128:~/foxtrot$ helm install foxtrot chart
 NAME: foxtrot
 LAST DEPLOYED: Wed Dec 17 20:13:20 2025
 NAMESPACE: default
@@ -15,6 +16,7 @@ NOTES:
 https://github.com/chrimson/foxtrot
 ```
 
+
 Verification  
 ```
 kubectl get service svc
@@ -22,6 +24,7 @@ kubectl get service svc
 ```
 curl http://checkip.amazonaws.com
 ```
+
 
 To Do:  
 sqlite  

@@ -1,0 +1,2 @@
+# foxtrot
+Some Kubernetes basics

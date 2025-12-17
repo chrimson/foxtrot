@@ -1,10 +1,10 @@
 # Foxtrot
 Some Kubernetes basics
 
-
-Deployment  i
+### Deployment
 ```
-ubuntu@ip-172-31-79-128:~/foxtrot$ helm install foxtrot chart
+foxtrot$ helm install foxtrot chart
+
 NAME: foxtrot
 LAST DEPLOYED: Wed Dec 17 20:13:20 2025
 NAMESPACE: default
@@ -16,8 +16,7 @@ NOTES:
 https://github.com/chrimson/foxtrot
 ```
 
-
-Verification  
+### Verification
 ```
 kubectl get service svc
 ```
@@ -25,8 +24,15 @@ kubectl get service svc
 curl http://checkip.amazonaws.com
 ```
 
-
-To Do:  
+### To Do
 sqlite  
 dockerfile  
-dokerhub  
+```
+apt update
+apt install sqlite3
+cd /usr/share/nginx/html/data/
+sqlite3 app.db "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);"
+sqlite3 app.db "INSERT INTO users (name) VALUES ('Alice');"
+sqlite3 app.db "SELECT * FROM users;"
+```
+dockerhub

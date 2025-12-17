@@ -9,6 +9,14 @@ spec:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
-  storageClassName: manual
-  hostPath:
-    path: "/mnt/vol"
+  storageClassName: local
+  local:
+    path: /mnt/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - ip-172-31-78-150

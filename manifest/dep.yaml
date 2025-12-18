@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep
+#  labels:
+#    app: appdep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appdep
+  template:
+    metadata:
+      labels:
+        app: appdep
+    spec:
+      containers:
+      - name: decksecops
+        image: chrimson/decksecops:latest
+        ports:
+        - containerPort: 5000
+

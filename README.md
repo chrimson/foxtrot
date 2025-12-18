@@ -3,7 +3,7 @@ Some Kubernetes basics
 
 ### Deployment
 ```
-foxtrot$ helm install foxtrot chart
+helm install foxtrot chart
 
 NAME: foxtrot
 LAST DEPLOYED: Wed Dec 17 20:13:20 2025
@@ -22,6 +22,7 @@ https://github.com/chrimson/foxtrot
 curl http://checkip.amazonaws.com
 ```
 ```
+(for port)
 kubectl get service svc
 ```
 ```
@@ -42,4 +43,6 @@ ls -l /tmp
 ```
 
 ### To Do
-Container communication from within and external to pod
+Container communication from external and pod  
+Python Flask app deployment  
+Web API Swagger  

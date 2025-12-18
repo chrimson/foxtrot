@@ -14,14 +14,19 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
+      - name: web
         image: nginx:latest
         ports:
         - containerPort: 80
-          name: web
         volumeMounts:
         - name: storage
           mountPath: /usr/share/nginx
+      - name: db
+        image: chrimson/sqlite3:latest
+        command: ["/bin/sh", "-c", "tail -f /dev/null"]
+        volumeMounts:
+        - name: storage
+          mountPath: /opt
       volumes:
       - name: storage
         persistentVolumeClaim:

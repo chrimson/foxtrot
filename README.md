@@ -18,21 +18,19 @@ https://github.com/chrimson/foxtrot
 
 ### Verification
 ```
+(on worker)
+curl http://checkip.amazonaws.com
+```
+```
 kubectl get service svc
 ```
 ```
-curl http://checkip.amazonaws.com
-```
+kubectl exec -it set-0 -c db -- sh
 
-### To Do
-sqlite  
-dockerfile  
-```
-apt update
-apt install sqlite3
-cd /usr/share/nginx/html/data/
 sqlite3 app.db "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);"
 sqlite3 app.db "INSERT INTO users (name) VALUES ('Alice');"
 sqlite3 app.db "SELECT * FROM users;"
 ```
-dockerhub
+
+### To Do
+Container communication from within and external to pod

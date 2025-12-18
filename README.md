@@ -30,6 +30,15 @@ kubectl exec -it set-0 -c db -- sh
 sqlite3 app.db "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);"
 sqlite3 app.db "INSERT INTO users (name) VALUES ('Alice');"
 sqlite3 app.db "SELECT * FROM users;"
+
+wget -qO - localhost:80
+
+touch /tmp/from-db.txt
+```
+```
+kubectl exec -it set-0 -c web -- bash
+
+ls -l /tmp
 ```
 
 ### To Do

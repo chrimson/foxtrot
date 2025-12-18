@@ -21,13 +21,19 @@ spec:
         volumeMounts:
         - name: storage
           mountPath: /usr/share/nginx
+        - name: share
+          mountPath: /tmp
       - name: db
         image: chrimson/sqlite3:latest
         command: ["/bin/sh", "-c", "tail -f /dev/null"]
         volumeMounts:
         - name: storage
           mountPath: /opt
+        - name: share
+          mountPath: /tmp
       volumes:
       - name: storage
         persistentVolumeClaim:
           claimName: pvc
+      - name: share
+        emptyDir: {}

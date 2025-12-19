@@ -44,5 +44,4 @@ ls -l /tmp
 
 ### To Do
 Container communication from external and pod  
-Python Flask app deployment  
 Web API Swagger  

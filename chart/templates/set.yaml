@@ -3,15 +3,14 @@ kind: StatefulSet
 metadata:
   name: set
 spec:
-  serviceName: svc
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: appset
   template:
     metadata:
       labels:
-        app: nginx
+        app: appset
     spec:
       containers:
       - name: web

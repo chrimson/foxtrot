@@ -3,7 +3,6 @@ kind: StatefulSet
 metadata:
   name: set
 spec:
-#  serviceName: svc
   replicas: 1
   selector:
     matchLabels:

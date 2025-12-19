@@ -70,5 +70,5 @@ sudo apt-get update
 sudo apt-get install helm
 
 
-watch 'echo --- PODS && kubectl get pod -o wide && echo \\n--- DEPLOYMENTS && kubectl get deploy -o wide && echo \\n--- STATEFUL SETS && kubectl get statefulset -o wide && echo \\n--- SERVICES && kubectl get svc -o wide && echo \\n--- PERSISTENT VOLUME CLAIMS && kubectl get pvc -o wide && echo \\n--- PERSISTENT VOLUMES && kubectl get pv && echo \\n--- NODES && kubectl get node'
+watch 'echo --- PODS && kubectl get pod -o wide && echo \\n--- REPLICA SETS && kubectl get replicaset && echo \\n--- DEPLOYMENTS && kubectl get deploy -o wide && echo \\n--- STATEFUL SETS && kubectl get statefulset -o wide && echo \\n--- SERVICES && kubectl get svc -o wide && echo \\n--- PERSISTENT VOLUME CLAIMS && kubectl get pvc -o wide && echo \\n--- PERSISTENT VOLUMES && kubectl get pv && echo \\n--- NODES && kubectl get node'
 ```

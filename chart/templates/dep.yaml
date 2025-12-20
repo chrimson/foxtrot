@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dep
+  name: decksecops
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: appdep
+      app: appdso
   template:
     metadata:
       labels:
-        app: appdep
+        app: appdso
     spec:
       containers:
       - name: decksecops

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: set
+  name: sqlnginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: appset
+      app: appsqlngx
   template:
     metadata:
       labels:
-        app: appset
+        app: appsqlngx
     spec:
       containers:
-      - name: web
+      - name: nginx
         image: nginx:latest
         ports:
         - containerPort: 80
@@ -22,7 +22,7 @@ spec:
           mountPath: /usr/share/nginx
         - name: share
           mountPath: /tmp
-      - name: db
+      - name: sql
         image: chrimson/sqlite3:latest
         command: ["/bin/sh", "-c", "tail -f /dev/null"]
         volumeMounts:

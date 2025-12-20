@@ -23,10 +23,10 @@ curl http://checkip.amazonaws.com
 ```
 ```
 (for port)
-kubectl get service svc
+kubectl get service sqlnginx
 ```
 ```
-kubectl exec -it set-0 -c db -- sh
+kubectl exec -it sqlnginx-0 -c sql -- sh
 
 sqlite3 app.db "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);"
 sqlite3 app.db "INSERT INTO users (name) VALUES ('Alice');"
@@ -37,7 +37,7 @@ wget -qO - localhost:80
 touch /tmp/from-db.txt
 ```
 ```
-kubectl exec -it set-0 -c web -- bash
+kubectl exec -it sqlnginx-0 -c nginx -- bash
 
 ls -l /tmp
 ```
@@ -47,5 +47,5 @@ ls -l /tmp
 [Weather API](https://github.com/chrimson/WeatherAPI)  
 
 ### To Do
-Container communication from external and pod  
+Container communication from external  
 Web API Swagger  

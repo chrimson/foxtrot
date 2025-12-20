@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: rep
+  name: weather
 spec:
   replicas: 2
   selector:
@@ -13,7 +13,7 @@ spec:
         app: webapi
     spec:
       containers:
-      - name: weather
+      - name: weatherapi
         image: chrimson/weatherapi
         ports:
         - containerPort: 8080

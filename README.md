@@ -42,6 +42,10 @@ kubectl exec -it set-0 -c web -- bash
 ls -l /tmp
 ```
 
+### Reference
+[deckSecOps](https://github.com/chrimson/deckSecOps)  
+[Weather API](https://github.com/chrimson/WeatherAPI)  
+
 ### To Do
 Container communication from external and pod  
 Web API Swagger  

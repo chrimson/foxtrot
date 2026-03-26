@@ -23,3 +23,14 @@ New-WebBinding -Name "Default Web Site" -IPAddress "*" -Port 80 -HostHeader $myD
 
 # 3. (Optional) If you have a 'www' version, add that too
 New-WebBinding -Name "Default Web Site" -IPAddress "*" -Port 80 -HostHeader "www.$myDomain"
+
+AWS CLI
+
+# 1. Download the 64-bit MSI installer
+Invoke-WebRequest "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi"
+
+# 2. Run the installer silently (/qn)
+Start-Process msiexec.exe -Wait -ArgumentList "/i AWSCLIV2.msi /qn"
+
+# 3. Refresh your environment variables (so you can use 'aws' immediately)
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")

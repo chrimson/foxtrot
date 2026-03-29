@@ -34,3 +34,7 @@ Start-Process msiexec.exe -Wait -ArgumentList "/i AWSCLIV2.msi /qn"
 
 # 3. Refresh your environment variables (so you can use 'aws' immediately)
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+dotnet new web -n MyApi --no-https
+
+dotnet publish -c Release -o ./publish

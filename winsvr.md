@@ -1,3 +1,24 @@
+$url = "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-64-bit.exe"
+
+$dest = "$env:TEMP\GitInstaller.exe"
+
+Invoke-WebRequest -Uri $url -OutFile $dest
+
+Start-Process -FilePath $dest -ArgumentList "/VERYSILENT /NORESTART" -Wait
+
+Remove-Item $dest
+
+
+$newPath = "C:\Your\New\Folder"
+
+$currentPath = [Environment]::GetEnvironmentVariable("Path", "Machine")
+
+[Environment]::SetEnvironmentVariable("Path", "$currentPath;$newPath", "Machine")
+
+$env:Path += ";C:\your\new\path"
+
+
+
 Start-Service sshd
 
 Set-Service -Name sshd -StartupType 'Automatic'

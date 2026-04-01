@@ -50,6 +50,12 @@ dotnet-host /install /quiet /norestart
 
 
 
+Install-WindowsFeature Web-Server
+
+Install-WindowsFeature Web-Mgmt-Service
+
+
+
 dotnet new web -n MyApi --no-https
 
 dotnet publish -c Release -o ./publish

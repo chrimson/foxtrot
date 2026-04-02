@@ -1,10 +1,9 @@
 ### Git, Vim
 ```
-$url = "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-64-bit.exe"
+$url = "https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.1/Git-2.53.0-64-bit.exe"
 $dest = "$env:TEMP\GitInstaller.exe"
 Invoke-WebRequest -Uri $url -OutFile $dest
 Start-Process -FilePath $dest -ArgumentList "/VERYSILENT /NORESTART" -Wait
-Remove-Item $dest
 ```
 
 ### path
@@ -12,7 +11,7 @@ Remove-Item $dest
 $newPath = "C:\Your\New\Folder"
 $currentPath = [Environment]::GetEnvironmentVariable("Path", "Machine")
 [Environment]::SetEnvironmentVariable("Path", "$currentPath;$newPath", "Machine")
-$env:Path += ";C:\your\new\path"
+$env:Path = [Environment]::GetEnvironmentVariable("Path", "Machine")
 ```
 
 ### sshd
@@ -24,35 +23,15 @@ New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled Tru
 C:\ProgramData\ssh\administrators_authorized_keys
 ```
 
-### AWS
-```
-Invoke-WebRequest "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi"
-Start-Process msiexec.exe -Wait -ArgumentList "/i AWSCLIV2.msi /qn"
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-```
-
-### .NET
-```
-https://dotnet.microsoft.com/en-us/download/dotnet/8.0
-dotnet-host /install /quiet /norestart
-```
-
-### IIS
-```
-Install-WindowsFeature Web-Server
-Install-WindowsFeature Web-Mgmt-Service
-```
-
 ### ASP
 ```
-dotnet new web -n MyApi --no-https
-dotnet publish -c Release -o ./publish
-
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
+Install-WindowsFeature Web-Mgmt-Service
+
+New-WebBinding -Name "Default Web Site" -IPAddress "*" -Port 80 -HostHeader "yourdomain.com"
 
 Invoke-WebRequest -Uri "https://yourdomain.com" -Method Head
-$myDomain = "yourdomain.com"
-New-WebBinding -Name "Default Web Site" -IPAddress "*" -Port 80 -HostHeader $myDomain
+
 ```
 
 ### ACME
@@ -66,3 +45,30 @@ Expand-Archive -Path "C:\win-acme\win-acme.zip" -DestinationPath "C:\win-acme"
 Remove-Item "C:\win-acme\win-acme.zip"
 wacs
 ```
+
+
+### .NET
+```
+https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+dotnet-host /install /quiet /norestart
+dotnet-sdk /install /quiet /norestart
+
+dotnet new web -n MyApi --no-https
+dotnet publish -c Release -o ./publish
+```
+
+### IIS
+```
+Install-WindowsFeature Web-Server
+Install-WindowsFeature Web-Mgmt-Service
+
+Install-WindowsFeature Web-Metabase, Web-Mgmt-Console
+```
+
+### AWS
+```
+Invoke-WebRequest "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi"
+Start-Process msiexec.exe -Wait -ArgumentList "/i AWSCLIV2.msi /qn"
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+```
+

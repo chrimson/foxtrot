@@ -23,29 +23,17 @@ New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled Tru
 C:\ProgramData\ssh\administrators_authorized_keys
 ```
 
-### ASP
+### IIS
 ```
-Install-WindowsFeature -name Web-Server -IncludeManagementTools
-Install-WindowsFeature Web-Mgmt-Service
+Install-WindowsFeature Web-Server
 
 New-WebBinding -Name "Default Web Site" -IPAddress "*" -Port 80 -HostHeader "yourdomain.com"
-
-Invoke-WebRequest -Uri "https://yourdomain.com" -Method Head
-
 ```
 
 ### ACME
 ```
-New-Item -Path "C:\win-acme" -ItemType Directory  
-Set-Location "C:\win-acme"
-$url = "https://github.com/win-acme/win-acme/releases/download/v2.2.9.1701/win-acme.v2.2.9.1701.x64.trimmed.zip"  
-$out = "C:\win-acme\win-acme.zip"
-Invoke-WebRequest -Uri $url -OutFile $out
-Expand-Archive -Path "C:\win-acme\win-acme.zip" -DestinationPath "C:\win-acme"
-Remove-Item "C:\win-acme\win-acme.zip"
 wacs
 ```
-
 
 ### .NET
 ```
@@ -53,22 +41,32 @@ https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 dotnet-host /install /quiet /norestart
 dotnet-sdk /install /quiet /norestart
 
-dotnet new web -n MyApi --no-https
+dotnet new webapi -n api
 dotnet publish -c Release -o ./publish
-```
 
-### IIS
-```
-Install-WindowsFeature Web-Server
-Install-WindowsFeature Web-Mgmt-Service
+$apiPath = "C:\inetpub\wwwroot\api"
+New-Item -Path $apiPath -ItemType Directory -Force
+Copy-Item -Path "C:\YourBuildFolder\*" -Destination $apiPath -Recurse
 
-Install-WindowsFeature Web-Metabase, Web-Mgmt-Console
+$appPoolName = "ApiPool"
+New-WebAppPool -Name $appPoolName
+Set-ItemProperty "IIS:\AppPools\$appPoolName" -Name "managedRuntimeVersion" -Value ""
+
+$siteName = "Default Web Site"
+$subPath = "api" # This becomes yourdomain.com/api
+New-WebApplication -Site $siteName -Name $subPath -PhysicalPath $apiPath -ApplicationPool $appPoolName
+
+$acl = Get-Acl $apiPath
+$permission = "IIS AppPool\$appPoolName","ReadAndExecute","Allow"
+$accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule $permission
+$acl.SetAccessRule($accessRule)
+Set-Acl $apiPath $acl
 ```
 
 ### AWS
 ```
 Invoke-WebRequest "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi"
 Start-Process msiexec.exe -Wait -ArgumentList "/i AWSCLIV2.msi /qn"
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+aws configure
 ```
 
